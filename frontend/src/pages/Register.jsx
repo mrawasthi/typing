@@ -1,7 +1,8 @@
+import React from "react"
+import RegisterComponent from "../Components/RegisterComponent"
 
-import "./styles/RegisterPage.css"
-export default function Register(){
+export default function Login(){
     return(
-        <h1>hello world from Register</h1>
+       <RegisterComponent />
     )
 }

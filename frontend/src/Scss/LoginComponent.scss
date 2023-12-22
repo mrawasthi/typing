@@ -1,0 +1,32 @@
+/* LoginComponent.css */
+*{
+    width: 100%;
+    
+}
+.login-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #19A7CE;
+  }
+  
+  .login-container {
+    background-color: #fff;
+    padding: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-form {
+    
+    margin-left: auto;
+  }
+  @media screen and (max-width: 600px) {
+    .login-container {
+      max-width: 100%; /* Adjust for smaller screens */
+    }
+  }
+  
+ 
+  
