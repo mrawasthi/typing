@@ -18,13 +18,38 @@ const Register = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    console.log(formData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("ok")
+    const {name,email,password,confirmPassword}=formData;
+    const cpassword=confirmPassword
+   console.log(confirmPassword)
+   console.log(name)
+   console.log(password)
+   console.log(email)
+    const res = await fetch("http://localhost:3000/Register",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        name,email,password,cpassword
+      })
+    });
+    const data=await res.json();
+     console.log(data)
+    if(res.status=="422" || !data){
+      window.alert("Invalid registeration")
+    }else{
+      window.alert("Registered successfully")
+      navigate("/login")
+    }
+    
     // Check if the password and confirmPassword match
-    if (formData.password !== formData.confirmPassword) {
+    /*if (formData.password !== formData.confirmPassword) {
       console.error('Password and Repeat Password do not match');
       // You can display an error message to the user here
       return;
@@ -38,7 +63,7 @@ const Register = () => {
       }
     } catch (error) {
       console.error('Error:', error);
-    }
+    }*/
   };
   return (
     <section >

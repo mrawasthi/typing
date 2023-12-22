@@ -18,17 +18,25 @@ export default function LoginComponent() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const {email,password}=formData;
     try {
-      const data = await loginUser(formData);
-      console.log('Response from server:', data);
-
-      if (data.success) {
-        localStorage.setItem('authtoken', data.authtoken);
-        navigate('/user');
-      } else {
-        alert('Enter valid credentials');
-      }
+      const res = await fetch("http://localhost:3000/Login",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        email,password
+      })
+    });
+    const data=await res.json();
+     console.log(data)
+    if(res.status=="422" || !data){
+      window.alert("Invalid Credentials")
+    }else{
+      window.alert("loggedin successfully")
+      navigate("/")
+    }
     } catch (error) {
       console.error('Error:', error);
     }

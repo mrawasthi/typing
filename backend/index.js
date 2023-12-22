@@ -10,7 +10,7 @@ const PORT=3000;
 app.use(express.json())
 app.use(cors())
 app.use(cookieparser())
-
+app.use(require('./routers/useroutes'))
 mongoose.connect("mongodb+srv://ayushhkumar135:ILIKEPRO@cluster0.ks4cqhn.mongodb.net/?retryWrites=true&w=majority",{
     useNewUrlParser:true,
     //useCreateIndex:true,
@@ -21,7 +21,7 @@ mongoose.connect("mongodb+srv://ayushhkumar135:ILIKEPRO@cluster0.ks4cqhn.mongodb
 }).catch((err)=> console.log(`${err}`+ "failed"))
 
 app.get("/",(req,res)=>{
-    res.status(500).send("hello world");
+    res.status(200).send("hello world");
 })
 app.listen(PORT,()=>{
     console.log(`app is running on ${PORT}`)
