@@ -9,9 +9,10 @@ const PORT=3000;
 //const URL=process.env.MONGO_URL
 app.use(express.json())
 app.use(cors())
-app.use(cookieparser())
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 app.use(require('./routers/useroutes'))
-mongoose.connect("mongodb+srv://ayushhkumar135:ILIKEPRO@cluster0.ks4cqhn.mongodb.net/?retryWrites=true&w=majority",{
+mongoose.connect("mongodb+srv://ayush2:1234567890@cluster0.ks4cqhn.mongodb.net/?retryWrites=true&w=majority",{
     useNewUrlParser:true,
     //useCreateIndex:true,
     useUnifiedTopology:true,
@@ -21,6 +22,7 @@ mongoose.connect("mongodb+srv://ayushhkumar135:ILIKEPRO@cluster0.ks4cqhn.mongodb
 }).catch((err)=> console.log(`${err}`+ "failed"))
 
 app.get("/",(req,res)=>{
+    
     res.status(200).send("hello world");
 })
 app.listen(PORT,()=>{

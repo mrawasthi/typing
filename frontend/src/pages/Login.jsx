@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../api/AuthApi';
+import { AuthProvider } from '../store/Auth';
+import { useAuth } from '../store/Auth';
 import '../Scss/Login.scss';
 
 export default function Login() {
   const navigate = useNavigate();
+  const {storeTokenInLS}=useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -29,13 +31,17 @@ export default function Login() {
         email,password
       })
     });
-    const data=await res.json();
-     console.log(data)
-    if(res.status=="422" || !data){
-      window.alert("Invalid Credentials")
-    }else{
+    if(res.ok){
+      const data=await res.json();
+      console.log(data)
+      storeTokenInLS(data.token)
+      //localStorage.setItem("token",data.token)
       window.alert("loggedin successfully")
       navigate("/")
+     } 
+    
+    else{
+      window.alert("Invalid Credentials")
     }
     } catch (error) {
       console.error('Error:', error);

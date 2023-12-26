@@ -1,10 +1,18 @@
 const express=require('express')
+const app=express()
 const jwt= require("jsonwebtoken")
 const router = express.Router()
 const User=require("../model/userSchema")
+const Post=require('../model/postModel')
 const bcrypt=require('bcryptjs')
+const cors = require('cors');
+const cookieParser = require("cookie-parser");
+router.use(cookieParser());
+const authenticate=require("../middlewares/authenticate.js")
+
 router.get("/",(req,res)=>{
-    res.send(`hello world from server router.js`)
+   
+    res.send("ok")
 })
 
 
@@ -36,6 +44,7 @@ router.post('/Register',async(req,res)=>{
 
 router.post("/Login",async(req,res)=>{
      try{
+      
          const {email,password} = req.body
          if(!email || !password){
             return res.status(422).json({error:"please fill all fields"})
@@ -49,9 +58,18 @@ router.post("/Login",async(req,res)=>{
             const isMatch=await bcrypt.compare(password,Loginuser.password)
             
             //const token=await Loginuser.generateAuthToken()
-            //console.log(token)
+            
+           // console.log(token)
+           
+            
+           // console.log(res)
             if(isMatch){
-            return res.status(201).json({message:"Logged in succesfully"})
+               const token=await Loginuser.generateAuthToken()
+               console.log(token);
+
+               res.status(201).json({ message: "user Signin Successfully",
+                                   token:token,
+               });
             }
             else{
                return res.status(422).json({error:"enter valid credentials"})
@@ -62,4 +80,33 @@ router.post("/Login",async(req,res)=>{
      }
 })
 
+router.post('/create-post',async(req,res)=>{
+   try{
+      
+      const {title,content}=req.body
+      console.log(title)
+      console.log(content)
+      const post=new Post({title,content})
+      //console.log("11")
+      const postData=await post.save();
+      if(!postData){
+         console.log ("here")
+         return res.status(422).json({message:"error occured"})
+      }else{
+      return res.status(201).json({message:"post added sucessfully"})
+      }
+   }catch(err){
+      
+      return res.status(422).json({message:"error occured 1"})
+   }
+})
+router.get('/check',authenticate,(req,res)=>{
+   try{
+
+      const userdata=req.user
+      res.status(200).json({msg:userdata})
+   }catch(err){
+      console.log("${err}")
+   }
+})
 module.exports=router
