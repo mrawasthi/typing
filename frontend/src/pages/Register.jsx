@@ -30,7 +30,7 @@ const Register = () => {
    console.log(name)
    console.log(password)
    console.log(email)
-    const res = await fetch("http://localhost:3000/Register",{
+    const res = await fetch("http://localhost:4000/Register",{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
