@@ -5,7 +5,7 @@ const cors=require("cors")
 const bcrypt=require("bcrypt")
 const cookieparser=require("cookie-parser")
 const app=express()
-const PORT=3000;
+const PORT=4000;
 //const URL=process.env.MONGO_URL
 app.use(express.json())
 app.use(cors())

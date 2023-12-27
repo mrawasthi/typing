@@ -6,6 +6,8 @@ const User=require("../model/userSchema")
 const Post=require('../model/postModel')
 const bcrypt=require('bcryptjs')
 const cors = require('cors');
+const upload=require('../middlewares/multerMiddleware.js')
+
 const cookieParser = require("cookie-parser");
 router.use(cookieParser());
 const authenticate=require("../middlewares/authenticate.js")
@@ -16,31 +18,41 @@ router.get("/",(req,res)=>{
 })
 
 
-router.post('/Register',async(req,res)=>{
-      console.log(req.body)
-      const {name,email,password,cpassword}=req.body
-      if(!name || !email || !password || !cpassword){
-        return res.status(422).json({error:"please fill all the fields"})
-      }
-      try{
-        const userExsist=await User.findOne({email})
-
-        if(userExsist){
-             return res.status(422).json({error:"Email already pesent"})
-        }else if(password!=cpassword){
-             return res.status(422).json({error:"password and confirm password not matching"})
-        }
-
-        const user=new User({name,email,password,cpassword})
-
-        const userRegistered=await user.save()
-
-        res.status(201).json({message:"user created successfully"})
-      }catch(err){
-        console.log(`${err}`)
-      }
-})
-
+router.post('/Register', upload.single('profilePicture'), async (req, res) => {
+   try {
+     const { name, email, password, cpassword } = req.body;
+ 
+     // Handle file upload logic here
+     let profilePicturePath = null;
+     if (req.file) {
+       // Assuming you have a 'profilePicture' field in your user schema
+       profilePicturePath = req.file.path;
+     }
+ 
+     // Continue with the rest of your registration logic...
+     if (!name || !email || !password || !cpassword) {
+       return res.status(422).json({ error: "Please fill all the fields" });
+     }
+ 
+     const userExist = await User.findOne({ email });
+ 
+     if (userExist) {
+       return res.status(422).json({ error: "Email already present" });
+     } else if (password !== cpassword) {
+       return res.status(422).json({ error: "Password and confirm password not matching" });
+     }
+ 
+     const user = new User({ name, email, password, cpassword, profilePicture: profilePicturePath });
+ 
+     const userRegistered = await user.save();
+ 
+     res.status(201).json({ message: "User created successfully", user: userRegistered });
+   } catch (err) {
+     console.log(`${err}`);
+     res.status(500).json({ error: 'Internal Server Error' });
+   }
+ });
+ 
 
 router.post("/Login",async(req,res)=>{
      try{
