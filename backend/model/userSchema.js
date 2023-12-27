@@ -14,11 +14,6 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    profilePicture: {
-        type: String,
-        required: true
-    },
-    
     cpassword:{
         type:String,
         required:true
