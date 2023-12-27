@@ -13,32 +13,40 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    profilePicture: null,
   });
 
+  
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value, type } = e.target;
+    // If the input is a file, use e.target.files to get the file
+    const inputValue = type === 'file' ? e.target.files[0] : value;
+    setFormData({ ...formData, [name]: inputValue });
     console.log(formData);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("ok")
-    const {name,email,password,confirmPassword}=formData;
-    const cpassword=confirmPassword
-   console.log(confirmPassword)
-   console.log(name)
-   console.log(password)
-   console.log(email)
-    const res = await fetch("http://localhost:4000/Register",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body: JSON.stringify({
-        name,email,password,cpassword
-      })
+    console.log("ok");
+    const { name, email, password, confirmPassword, profilePicture } = formData;
+    const cpassword = confirmPassword;
+    console.log(confirmPassword);
+    console.log(name);
+    console.log(password);
+    console.log(email);
+    console.log(profilePicture); // Add this line to log the selected file
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('name', name);
+    formDataToSend.append('email', email);
+    formDataToSend.append('password', password);
+    formDataToSend.append('cpassword', confirmPassword);
+    formDataToSend.append('profilePicture', profilePicture);
+
+    const res = await fetch("http://localhost:4000/Register", {
+      method: "POST",
+      body: formDataToSend,
     });
+
     const data=await res.json();
      console.log(data)
     if(res.status=="422" || !data){
@@ -96,6 +104,17 @@ const Register = () => {
                       />
                       <label className="form-label" htmlFor="form3Example3cg">Your Email</label>
                     </div>
+
+                    <div className="form-outline mb-4">
+            <input
+              type="file"
+              id="form3ExampleFile"
+              className="form-control form-control-lg"
+              name="profilePicture"
+              onChange={handleChange}
+            />
+            <label className="form-label" htmlFor="form3ExampleFile">Choose File</label>
+          </div>
 
                     <div className="form-outline mb-4">
                       <input
