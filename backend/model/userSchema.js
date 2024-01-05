@@ -30,11 +30,11 @@ const userSchema=new mongoose.Schema({
 
 userSchema.pre('save',async function(next){
     console.log("hi guys from inside")
-     if(this.isModified('password')){
+    if(this.isModified('password')){
         this.password=await bcrypt.hash(this.password,12)
         this.cpassword=await bcrypt.hash(this.cpassword,12)
-     }
-     next()
+    }
+    next()
 })
 
 userSchema.methods.generateAuthToken=async function(){
@@ -42,7 +42,7 @@ userSchema.methods.generateAuthToken=async function(){
        let token=jwt.sign({_id:this._id},"IAMAWEBDEVELOPERANDIAMCOOLYOUKNOWSUBSCRIBEHELLOWORLDIAMHERE32CAHARACTERS")
        console.log(token);
        this.tokens=this.tokens.concat({token:token})
-      await this.save()
+       await this.save()
        return token
     }catch(err){
       console.log(`${err}`)

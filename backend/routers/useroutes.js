@@ -11,10 +11,8 @@ router.use(cookieParser());
 const authenticate=require("../middlewares/authenticate.js")
 
 router.get("/",(req,res)=>{
-   
     res.send("ok")
 })
-
 
 router.post('/Register',async(req,res)=>{
       console.log(req.body)
@@ -23,17 +21,15 @@ router.post('/Register',async(req,res)=>{
         return res.status(422).json({error:"please fill all the fields"})
       }
       try{
-        const userExsist=await User.findOne({email})
-
-        if(userExsist){
-             return res.status(422).json({error:"Email already pesent"})
+        const userExist=await User.findOne({email})
+        if(userExist){
+            return res.status(422).json({error:"Email already pesent"})
         }else if(password!=cpassword){
-             return res.status(422).json({error:"password and confirm password not matching"})
+            return res.status(422).json({error:"password and confirm password not matching"})
         }
 
         const user=new User({name,email,password,cpassword})
-
-        const userRegistered=await user.save()
+        await user.save()
 
         res.status(201).json({message:"user created successfully"})
       }catch(err){
@@ -44,7 +40,6 @@ router.post('/Register',async(req,res)=>{
 
 router.post("/Login",async(req,res)=>{
      try{
-      
          const {email,password} = req.body
          if(!email || !password){
             return res.status(422).json({error:"please fill all fields"})
@@ -56,20 +51,11 @@ router.post("/Login",async(req,res)=>{
          }
          else{
             const isMatch=await bcrypt.compare(password,Loginuser.password)
-            
-            //const token=await Loginuser.generateAuthToken()
-            
-           // console.log(token)
-           
-            
-           // console.log(res)
             if(isMatch){
                const token=await Loginuser.generateAuthToken()
                console.log(token);
 
-               res.status(201).json({ message: "user Signin Successfully",
-                                   token:token,
-               });
+               res.status(201).json({ message: "user Signin Successfully",token:token});
             }
             else{
                return res.status(422).json({error:"enter valid credentials"})
@@ -102,7 +88,6 @@ router.post('/create-post',async(req,res)=>{
 })
 router.get('/check',authenticate,(req,res)=>{
    try{
-
       const userdata=req.user
       res.status(200).json({msg:userdata})
    }catch(err){

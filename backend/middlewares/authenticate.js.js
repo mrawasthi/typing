@@ -10,25 +10,24 @@ app.use(cookieParser());
 // Use CORS middleware
 
 const Authenticate = async (req, res, next) => {
-  const token = req.header('Authorization');
+    const token = req.header('Authorization');
    
     if(!token){
-        return res.status(401).json({msg:"Invalid auth"})
+      return res.status(401).json({msg:"Invalid auth"})
     }
     const jwtToken=token.replace("Bearer","").trim()
-     try{
-        const isVerified=jwt.verify(jwtToken,"IAMAWEBDEVELOPERANDIAMCOOLYOUKNOWSUBSCRIBEHELLOWORLDIAMHERE32CAHARACTERS")
-         //console.log(isVerified)
-
-         const userData=await User.findOne({_id:isVerified._id})
-         console.log(userData)
-         req.user=userData
-         req.token=token
-         req.userID=userData._id
-         next()
+    try{
+      const isVerified=jwt.verify(jwtToken,"IAMAWEBDEVELOPERANDIAMCOOLYOUKNOWSUBSCRIBEHELLOWORLDIAMHERE32CAHARACTERS")
+      
+      const userData=await User.findOne({_id:isVerified._id})
+      console.log(userData)
+      req.user=userData
+      req.token=token
+      req.userID=userData._id
+      next()
    } catch (err) {
-       console.error('Authentication Error:', err);
-       res.status(201).send("Unauthorized access");
+      console.error('Authentication Error:', err);
+      res.status(201).send("Unauthorized access");
    }
 };
 
