@@ -1,8 +1,12 @@
 // src/components/Profile.jsx
 import React from 'react';
-
+import { useAuth } from '../store/auth';
 const Profile = () => {
+
+  const {user} =useAuth()
+  console.log(user._id)
   return (
+    
     <div className="container">
       <div className="row d-flex justify-content-center">
         <div className="col-md-10 mt-5 pt-5 ">
@@ -11,7 +15,7 @@ const Profile = () => {
               <div className="card-block text-center text-white">
                 <i className="fas fa-user-tie fa-7x mt-5"></i>
                 <h2 className="font-weight-bold mt-4">Profile</h2>
-                <p>Name</p>
+                <p>{user.name}</p>
                 <i className="far fa-edit fa-2x mb-4"></i>
               </div>
             </div>
@@ -21,7 +25,7 @@ const Profile = () => {
               <div className="row-">
                 <div className="col-sm-6">
                   <p className="font-weight-bold">Email:</p>
-                  <h6 className="text-muted">useremail</h6>
+                  <h6 className="text-muted">{user.email}</h6>
                 </div>
                 <div className="col-sm-6">
                   <p className="font-weight-bold">Phone:</p>

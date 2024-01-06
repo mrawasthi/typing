@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Scss/Home.scss';
-import { useAuth } from '../store/Auth';
+import { useAuth } from '../store/auth';
 import Topbar from "../Components/topbar/Topbar";
 
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const {LogoutUser} =useAuth()
+  const {LogoutUser,user} =useAuth()
+  console.log(user._id)
   //const {islogged}=useAuth()
  // if(islogged==false){
    // navigate("/Login")
@@ -43,9 +44,13 @@ const HomePage = () => {
   },[])
      
  */
+  
+
+  
   const logout=()=>{
-    LogoutUser()
     console.log("hello world")
+    LogoutUser()
+    
     navigate("/Login")
   }
   

@@ -5,7 +5,13 @@ export const AuthContext=createContext();
 // eslint-disable-next-line react/prop-types
 export const AuthProvider= ({children})=>{
     const [token,setToken]=useState(localStorage.getItem("token"))
-    const [islogged,setIslogged]=useState(false)
+    const [islogged,setislogged]=useState(false)
+    const dummy={
+        _id:"hello",
+        name:"ayush"
+    }
+    const [user,setUser]=useState({})
+    let checking=!!token
     const storeTokenInLS=(serverToken)=>{
         return localStorage.setItem("token",serverToken)
     }
@@ -24,18 +30,25 @@ export const AuthProvider= ({children})=>{
                 Authorization:`Bearer ${token}`
             }
            })
-           if(response.ok) {
+           if(response) {
             const data=await response.json()
-            setIslogged(true)
+            console.log(data.msg)
+            let obj=data.msg
+            console.log(obj)
+            setUser(obj)
+            console.log(user)
            }               
         }catch(error){
             console.log("${error}")
         }
      }
     
+    useEffect(()=>{
+        userAuthentication()
+    },[])
    return(
 
-   <AuthContext.Provider value={{storeTokenInLS,LogoutUser,islogged}}>
+   <AuthContext.Provider value={{user,checking,storeTokenInLS,LogoutUser}}>
        {children}
    </AuthContext.Provider>
    ) 
