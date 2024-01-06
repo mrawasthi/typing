@@ -94,4 +94,24 @@ router.get('/check',authenticate,(req,res)=>{
       console.log("${err}")
    }
 })
+//friend routes
+router.post('/cancelRequest/:id', authenticate, async(req, res)=>{
+   try{
+      const user=await User.findOne({_id: req.body.id})
+      const friendUser=await User.findOne({_id: req.params.id})
+      const usertoFriend = await User.findByIdAndUpdate(
+         user._id,
+         { $pull: { pendingRequest:friendUser._id} },
+         { new: true } 
+      )
+      const FriendtoUser = await User.findByIdAndUpdate(
+         friendUser._id,
+         { $pull: { pendingRequest:user._id} },
+         { new: true } 
+      )
+      res.status(200).json({message: "Done"})
+   }catch(err){
+      console.log(`${err}`)
+   }
+})
 module.exports=router
