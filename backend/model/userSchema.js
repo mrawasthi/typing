@@ -25,6 +25,16 @@ const userSchema=new mongoose.Schema({
                 required:true
             }
         }
+    ],
+    friends: [
+        {
+            type: mongoose.Schema.Types.ObjectId, ref: 'User' 
+        }
+    ],
+    pendingRequest: [
+        {
+            type: mongoose.Schema.Types.ObjectId, ref: 'User' 
+        }
     ]
 })
 
