@@ -4,6 +4,7 @@ import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Chat from "../pages/Chat";
 import Profile from "../pages/Profile";
+
 export const router = createBrowserRouter([
   {
     path: "/login",
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/chats",
+    element: <Chat/>,
   },
   {
     path: "/chats",

@@ -22,7 +22,7 @@ export default function Login() {
     e.preventDefault();
     const {email,password}=formData;
     try {
-      const res = await fetch("http://localhost:4000/Login",{
+      const res = await fetch("http://localhost:3000/Login",{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
