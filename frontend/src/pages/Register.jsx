@@ -67,13 +67,12 @@ const Register = () => {
   };
   return (
     <section >
-      <div className="whole" ></div>
-        <div className="container ">
-  
-                  <h2 className="text-uppercase text-center mb-5">Create an account</h2>
+      <div className="whole" >
+        <div className="container register-pane">
+                  <h2 className="text-uppercase text-center mb-5 mt-2">Create an account</h2>
 
                   <form onSubmit={handleSubmit} method='post'>
-                    <div className="form-outline mb-4">
+                    <div className="form-outline mt-2 mb-4">
                       <input
                         type="text"
                         id="form3Example1cg"
@@ -81,11 +80,11 @@ const Register = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
+                        placeholder='Your Name'
                       />
-                      <label className="form-label" htmlFor="form3Example1cg">Your Name</label>
                     </div>
 
-                    <div className="form-outline mb-4">
+                    <div className="form-outline mb-4 mt-4">
                       <input
                         type="email"
                         id="form3Example3cg"
@@ -93,11 +92,11 @@ const Register = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                        placeholder='Email'
                       />
-                      <label className="form-label" htmlFor="form3Example3cg">Your Email</label>
                     </div>
 
-                    <div className="form-outline mb-4">
+                    <div className="form-outline mb-4 mt-4">
                       <input
                         type="password"
                         id="form3Example4cg"
@@ -105,11 +104,11 @@ const Register = () => {
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
+                        placeholder='Password'
                       />
-                      <label className="form-label" htmlFor="form3Example4cg">Password</label>
                     </div>
 
-                    <div className="form-outline mb-4">
+                    <div className="form-outline mb-4 mt-4">
                       <input
                         type="password"
                         id="form3Example4cdg"
@@ -117,11 +116,11 @@ const Register = () => {
                         name="confirmPassword"
                         value={formData.confirmPassword}
                         onChange={handleChange}
+                        placeholder='Confirm Password'
                       />
-                      <label className="form-label" htmlFor="form3Example4cdg">Repeat your password</label>
                     </div>
 
-                    <div className="form-check d-flex justify-content-center mb-5">
+                    <div className="form-check d-flex justify-content-center mb-3 mt-5">
                       <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
                       <label className="form-check-label" htmlFor="form2Example3g">
                         I agree all statements in <a href="#!" className="text-body"><u>Terms of service</u></a>
@@ -129,14 +128,14 @@ const Register = () => {
                     </div>
 
                     <div className="d-flex justify-content-center">
-                      <button type="submit" className="btn btn-success btn-block btn-lg" style={{ background: 'linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))' }}>Register</button>
+                      <button type="submit" className="btn btn-success btn-block btn-lg" style={{ background: 'black' }}>Register</button>
                     </div>
 
                     <p className="text-center text-muted mt-5 mb-0">Have already an account? <Link to="/login" className="fw-bold text-body"><u>Login here</u></Link></p>
                   </form>
                 </div>
               
-          
+          </div>
     </section>
   );
 };

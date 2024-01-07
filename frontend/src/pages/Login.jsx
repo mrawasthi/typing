@@ -49,58 +49,42 @@ export default function Login() {
   };
   return (
     <section className="login-section">
-      <div className="container login-container">
+      <div className="container login-cont">
         <form onSubmit={handleSubmit} className="login-form">
-          <div className="d-flex align-items-center mb-3 pb-1">
-            <i className="fas fa-cubes fa-2x me-3" style={{ color: '#ff6219' }}></i>
-            <span className="h1 fw-bold mb-0"></span>
-          </div>
-
-          <h2 className="text-uppercase text-center mb-5">Sign in</h2>
-          <div className="form-outline mb-4">
+          <h2 className="text-uppercase text-center loginheading">Sign in</h2>
+          <div className="form-outline mb-4 outeremaildiv">
             <input
               name="email"
+              placeholder="email"
               type="email"
               id="form2Example17"
-              className="form-control form-control-lg"
+              className="form-control form-control-lg forminputemail"
               onChange={handleChange}
             />
-            <label className="form-label" htmlFor="form2Example17" name="email">
-              Email address
-            </label>
+           
           </div>
 
-          <div className="form-outline mb-4">
+          <div className="form-outline mb-4 outerpassworddiv">
             <input
               name="password"
               type="password"
+              placeholder="password"
               id="form2Example27"
-              className="form-control form-control-lg"
+              className="form-control form-control-lg forminputpassword"
               onChange={handleChange}
             />
-            <label className="form-label" htmlFor="form2Example27" name="password">
-              Password
-            </label>
+            
           </div>
 
-          <div className="pt-1 mb-4">
-            <button className="btn btn-dark btn-lg btn-block" type="submit" style={{ backgroundColor: '#146C94' }}>
+          <div className="pt-1 loginbtndiv">
+            <button className="btn btn-dark btn-lg btn-block loginbtn" type="submit" style={{ backgroundColor: '#000' }}>
               Login
             </button>
           </div>
-
-          <a className="small text-muted" href="#!">
-            Forgot password?
-          </a>
-          <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
-            Don't have an account? <a href="/signup" style={{ color: '#393f81' }}>Register here</a>
+          <p className="mb-4 mt-4 pb-lg-2 loginpara" style={{ color: '#000' }}>
+            Don't have an account? <a href="/register" style={{ color: '#393f81' }}>Register here</a>
           </p>
-          <a href="#!" className="small text-muted">
-            Terms of use.
-          </a>
-          <a href="#!" className="small text-muted">
-            Privacy policy
-          </a>
+          
         </form>
       </div>
     </section>

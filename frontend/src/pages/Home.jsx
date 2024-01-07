@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../Scss/Home.scss';
 import { useAuth } from '../store/auth';
 import Topbar from "../Components/topbar/Topbar";
+import MainArea from "../Components/mainArea/mainArea.jsx"
 
 
 const HomePage = () => {
@@ -57,21 +58,11 @@ const HomePage = () => {
 
   return (
     
-    <>
+    <div className="mainHome">
      <Topbar />
-     <div className="homeContainer">
-        
-      </div>
-        <div className="container emp-profile">
-            <form method="GET">
-              <h1> hello guys help</h1>
-            </form>
-            <button className="logout-button" onClick={logout}>
-             Logout
-          </button>
-       </div>
-    </>
-)
+     <MainArea />
+    </div>
+  )
 };
 
 export default HomePage;

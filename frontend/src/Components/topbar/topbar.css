@@ -61,3 +61,9 @@
 .profile-popup-item:hover {
   background-color: #f8f9fa; /* Light background color on hover */
 }
+.app{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
