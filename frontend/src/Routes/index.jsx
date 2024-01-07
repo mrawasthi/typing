@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Login from "../pages/Login";
 import Register from "../pages/Register"; 
 import Home from "../pages/Home";
-import Chat from "../pages/Chat";
+import Leaderboard from "../pages/Leaderboard";
 import Profile from "../pages/Profile";
 
 export const router = createBrowserRouter([
@@ -23,11 +23,8 @@ export const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/chats",
-    element: <Chat/>,
+    path: "/leaderboard",
+    element: <Leaderboard/>,
   },
-  {
-    path: "/chats",
-    element: <Chat/>,
-  },
+  
 ]);

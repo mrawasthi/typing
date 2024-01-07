@@ -2,7 +2,6 @@
 const express=require("express");
 const mongoose =require("mongoose")
 const cors=require("cors")
-const bcrypt=require("bcrypt")
 const multer=require("multer")
 const cookieparser=require("cookie-parser")
 const app=express()
