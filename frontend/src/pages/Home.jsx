@@ -4,7 +4,7 @@ import '../Scss/Home.scss';
 import { useAuth } from '../store/auth';
 import Topbar from "../Components/topbar/Topbar";
 import MainArea from "../Components/mainArea/mainArea.jsx"
-
+import dummyData from "../data.js"
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -46,8 +46,8 @@ const HomePage = () => {
      
  */
   
-
-  
+   console.log(dummyData)
+   
   const logout=()=>{
     console.log("hello world")
     LogoutUser()

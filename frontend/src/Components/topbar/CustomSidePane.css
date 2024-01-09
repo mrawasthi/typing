@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: linear-gradient(0deg, rgba(136,136,136,1) 25%, rgba(180,178,176,0.017331932773109293) 100%);
+    background: linear-gradient(0deg, rgb(184, 183, 183) 10%, rgba(204, 203, 202, 0.017) 100%);
 }
 .offcanvas-header{
     height: auto;

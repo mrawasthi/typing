@@ -1,10 +1,13 @@
 import React from 'react'
 import './LeftPane.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import dummyData from "../../data.js"
+import Timer from './Timer.jsx'
 
-const leftPane = ()=>{
+const leftPane = (props)=>{
     const [toggleButtonDifficulty, setToggleButtonDifficulty]=React.useState(false);
     const [toggleButtonTimer, setToggleButtonTimer]=React.useState(false);
+    let randomInt=(Math.floor(Math.random()*10))%5;
     const [visibleButtonTimer, setVisibleButtonTimer]=React.useState({
         color: "dark",
         text: "Timer"
@@ -29,16 +32,22 @@ const leftPane = ()=>{
             setVisibleButtonTimer((prev)=>{
                 return {...prev, text: "1 MINUTE"};
             })
+            const setTimer=props.setTimer
+            setTimer(60)
         }
         else if(eventid==2){
             setVisibleButtonTimer((prev)=>{
                 return {...prev, text: "2 MINUTE"};
             })
+            const setTimer=props.setTimer
+            setTimer(120)
         }
         else if(eventid==3){
             setVisibleButtonTimer((prev)=>{
                 return {...prev, text: "5 MINUTE"};
             })
+            const setTimer=props.setTimer
+            setTimer(300)
         }
     }
     function changeStateDiff(e){
@@ -48,21 +57,33 @@ const leftPane = ()=>{
             setVisibleButtonDiff((prev)=>{
                 return {...prev, color: "success", text: "Easy"};
             })
+            const setTextData=props.setTextData
+            setTextData(dummyData.easy[randomInt])
         }
         else if(eventid==5){
             setVisibleButtonDiff((prev)=>{
                 return {...prev, color: "warning", text: "Medium"};
             })
+            const setTextData=props.setTextData
+            setTextData(dummyData.medium[randomInt])
         }
         else if(eventid==6){
             setVisibleButtonDiff((prev)=>{
                 return {...prev, color: "danger", text: "Hard"};
             })
+            const setTextData=props.setTextData
+            setTextData(dummyData.hard[randomInt])
         }
     }
     
     return(
         <>
+            <Timer 
+              timer={props.timer}
+              setTimer={props.setTimer}
+              running={props.running}
+              setRunning={props.setRunning}
+            />
             <p class="d-inline-flex gap-1 left-toggle">
                 <a class={`btn btn-${visibleButtonDiff.color} leftpaneout`} onClick={handleToggleDifficulty} data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" >
                     {visibleButtonDiff.text}

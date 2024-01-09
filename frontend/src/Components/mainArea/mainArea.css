@@ -21,8 +21,10 @@
     padding: 0px 10px;
     align-items: end;
     padding: 5px;
+    flex-direction: column;
 }
 .stageArea{
+    position: relative;
     grid-column-start: 2;
     grid-column-end: 6;
     grid-row-start: 1;
@@ -40,4 +42,48 @@
     border-radius: 10px;
     background: linear-gradient(to right, rgba(136,136,136,1) 25%, rgba(180,178,176,0.017331932773109293) 100%);
 }
-
+.main-textarea{
+    resize: none;
+    border: none;
+    outline: none;
+    font-family: monospace;
+    font-size: 18px;
+    caret-color: transparent;
+    background-color: transparent;
+    color:white;
+    overflow-wrap: break-word;
+}
+.textarea-div{
+    resize: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    top:0;
+    left:4px;
+    font-size: 18px;
+    position: absolute;
+    text-align: left;
+    font-family: monospace;
+    user-select: none;
+    pointer-events: none;
+    color: gray;
+    overflow-wrap: break-word;
+    cursor: auto;
+}
+.super-list{
+    font-size: 0px;
+    padding: 0px;
+}
+.super-list li{
+    font-size: 18px;
+    display: inline;
+}
+.col-red{
+    background-color: lightcoral;
+    color: black;
+  }
+  
+  .col-green{
+    background-color: lightgreen;
+    color: black;
+  }

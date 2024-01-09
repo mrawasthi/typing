@@ -16,9 +16,6 @@ const CustomSidePane = ({ show, handleClose }) => {
 
   return (
     <Offcanvas show={show} onHide={handleClose} placement="end">
-      <Offcanvas.Header closeButton>
-        <Offcanvas.Title className="offcanvas-head">NAVIGATION</Offcanvas.Title>
-      </Offcanvas.Header>
       <Offcanvas.Body className="offcanvas-bg">
         <button type="button" class="btn border-0 btn-lg active text-left">
           <Link to='/profile' style={{ textDecoration: 'none', color: 'inherit' }}>Profile</Link>
