@@ -1,4 +1,5 @@
 import React from 'react'
+import './Timer.css'
 
 export default function Timer(props){
     const setRunning=props.setRunning
@@ -26,7 +27,10 @@ export default function Timer(props){
     
     return (
         <div  className="timer-area">
-            <p>{minute<10 && `0`}{minute}:{second<10 && `0`}{second}</p>
+            <div className="timer-area-inner">
+                <div className="timer">{minute<10 && `0`}{minute}</div>
+                <div className="timer">{second<10 && `0`}{second}</div>
+            </div>
         </div>
     )
 }

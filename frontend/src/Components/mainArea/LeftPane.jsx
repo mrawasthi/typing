@@ -76,6 +76,7 @@ const leftPane = (props)=>{
     
     return(
         <>
+            <div className="timer-area-text">Judge Your Speed</div>
             <Timer 
               timer={props.timer}
               setTimer={props.setTimer}

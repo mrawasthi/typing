@@ -31,7 +31,7 @@
     grid-row-end: 6;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    background: linear-gradient(to top, rgba(136,136,136,1) 25%, rgba(180,178,176,0.017331932773109293) 100%);
+    background: #323232;
 }
 .bottomPane{
     grid-column-start: 1;
@@ -50,7 +50,7 @@
     font-size: 18px;
     caret-color: transparent;
     background-color: transparent;
-    color:white;
+    color:#323232;
     overflow-wrap: break-word;
 }
 .textarea-div{
@@ -58,15 +58,17 @@
     border: none;
     outline: none;
     background-color: transparent;
-    top:0;
-    left:4px;
+    top:20px;
+    left:20px;
+    right: 20px;
+    bottom: 20px;
     font-size: 18px;
     position: absolute;
     text-align: left;
     font-family: monospace;
     user-select: none;
     pointer-events: none;
-    color: gray;
+    color: white;
     overflow-wrap: break-word;
     cursor: auto;
 }
@@ -79,13 +81,11 @@
     display: inline;
 }
 .col-red{
-    background-color: lightcoral;
-    color: black;
+    color: red;
   }
   
   .col-green{
-    background-color: lightgreen;
-    color: black;
+    color: lightgreen;
   }
   .no-color{
     background-color: none;
