@@ -5,18 +5,12 @@ import dummyData from "../../data.js"
 import Timer from './Timer.jsx'
 
 const leftPane = (props)=>{
+
     const [toggleButtonDifficulty, setToggleButtonDifficulty]=React.useState(false);
     const [toggleButtonTimer, setToggleButtonTimer]=React.useState(false);
-    let randomInt=(Math.floor(Math.random()*10))%5;
-    const [visibleButtonTimer, setVisibleButtonTimer]=React.useState({
-        color: "dark",
-        text: "Timer"
-    })
-    const [visibleButtonDiff, setVisibleButtonDiff]=React.useState({
-        color: "dark",
-        text: "Difficulty"
-    })
+    const {setVisibleButtonDiff, setVisibleButtonTimer,visibleButtonTimer,visibleButtonDiff}=props
 
+    let randomInt=(Math.floor(Math.random()*10))%5;
     function handleToggleDifficulty(){
         setToggleButtonTimer(false);
         setToggleButtonDifficulty(!toggleButtonDifficulty);
@@ -28,12 +22,14 @@ const leftPane = (props)=>{
     function changeStateTimer(e){
         const eventid=e.target.id;
         handleToggleTimer();
+        const setTimerToggle=props.setTimerToggle
+        setTimerToggle(true)
         if(eventid==1){
             setVisibleButtonTimer((prev)=>{
                 return {...prev, text: "1 MINUTE"};
             })
             const setTimer=props.setTimer
-            setTimer(60)
+            setTimer(10)
         }
         else if(eventid==2){
             setVisibleButtonTimer((prev)=>{
@@ -53,6 +49,8 @@ const leftPane = (props)=>{
     function changeStateDiff(e){
         const eventid=e.target.id;
         handleToggleDifficulty();
+        const setDifficultyToggle=props.setDifficultyToggle
+        setDifficultyToggle(true)
         if(eventid==4){
             setVisibleButtonDiff((prev)=>{
                 return {...prev, color: "success", text: "Easy"};

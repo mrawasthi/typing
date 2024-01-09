@@ -8,7 +8,7 @@ const dummyData = {
   ],
   medium: [
     'where there is a will, there is a way.',
-    'don’t count your chickens before they hatch.',
+    'don:t count your chickens before they hatch.',
     'you can’t make an omelette without breaking eggs.',
     'the pen is mightier than the sword.',
     'don’t put all your eggs in one basket.',

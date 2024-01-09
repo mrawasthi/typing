@@ -1,7 +1,10 @@
 // Leaderboard.jsx
 import React from 'react';
-//import '../Scss/Leaderboard.scss';
-// import goldmedal from "../image/goldmedal.png"
+import '../Scss/Leaderboard.scss';
+import goldmedal from "../image/goldmedal.png"
+import silvermedal from "../image/silvermedal.png"
+import bronzemedal from "../image/bronzemedal.png"
+import award from "../image/award.png"
 
 const Leaderboard = () => {
   // Mock data (replace this with actual data fetching)
@@ -10,6 +13,13 @@ const Leaderboard = () => {
     { rank: 2, name: 'Jane Smith', speed: 45, accuracy: 92 },
     { rank: 3, name: 'Bob Johnson', speed: 42, accuracy: 90 },
     // Add more data as needed
+    { rank: 4, name: 'Alice Johnson', speed: 41, accuracy: 88 },
+    { rank: 5, name: 'Charlie Brown', speed: 40, accuracy: 87 },
+    { rank: 6, name: 'David Johnson', speed: 39, accuracy: 86 },
+    { rank: 7, name: 'Emma Smith', speed: 38, accuracy: 85 },
+    { rank: 8, name: 'Frank White', speed: 37, accuracy: 84 },
+    { rank: 9, name: 'Grace Lee', speed: 36, accuracy: 83 },
+    { rank: 10, name: 'Henry Davis', speed: 35, accuracy: 82 },
   ];
 
   return (
@@ -18,21 +28,21 @@ const Leaderboard = () => {
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
+            <th scope="col">Rank</th>
+            <th className="name" scope="col">Name</th>
             <th scope="col">Speed (WPM)</th>
             <th scope="col">Accuracy (%)</th>
-            <th scope="col">Medal</th>
+            
           </tr>
         </thead>
         <tbody>
           {leaderboardData.map((leader) => (
-            <tr key={leader.rank}>
-              <th scope="row">{leader.rank}</th>
-              <td className="text-center">{leader.name}</td>
+            <tr className="row-table" key={leader.rank}>
+            
+              <td className="leaderboard">{leader.rank <= 3 ? renderMedal(leader.rank) : leader.rank}</td>
+              <td className="name">{leader.name}</td>
               <td>{leader.speed}</td>
               <td>{leader.accuracy}</td>
-              <td>{renderMedal(leader.rank)}</td>
             </tr>
           ))}
         </tbody>
@@ -45,11 +55,11 @@ const Leaderboard = () => {
 const renderMedal = (rank) => {
   switch (rank) {
     case 1:
-      return <img src="gold-medal.png" alt="Gold Medal" className="medal" />;
+      return <img src={goldmedal} alt="Gold Medal" className="medal" />;
     case 2:
-      return <img src="silver-medal.png" alt="Silver Medal" className="medal" />;
+      return <img src={silvermedal} alt="Silver Medal" className="medal" />;
     case 3:
-      return <img src="bronze-medal.png" alt="Bronze Medal" className="medal" />;
+      return <img src={bronzemedal} alt="Bronze Medal" className="medal" />;
     default:
       return null;
   }

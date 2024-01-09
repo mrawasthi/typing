@@ -1,0 +1,36 @@
+/* Leaderboard.css */
+.leaderboard-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: linear-gradient(to right, #000000, #ffffff);
+  color: #ffffff;
+  height:fit-content;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #333333;
+}
+
+.medal {
+  width: 30px;
+  height: 30px;
+}
+.name {
+  margin-left: 60px;
+}
+
+/* Add this rule for Rank */
+
+

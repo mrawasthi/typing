@@ -87,3 +87,6 @@
     background-color: lightgreen;
     color: black;
   }
+  .no-color{
+    background-color: none;
+  }
