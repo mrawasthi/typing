@@ -187,11 +187,20 @@ router.post('/unfriend/:id', authenticate, async(req, res)=>{
 router.post('/highscore/:id',authenticate,async(req,res)=>{
    try{
       const user=await User.findOne({_id:req.params.id})
+      const id=req.params.id
       const currentScore=req.body.score
       const highscore=user.highScore
+      console.log(currentScore)
+      const curr=parseInt(currentScore)
+      console.log(curr)
+      if(curr>highscore){
+         const tm= await User.findByIdAndUpdate(id,
+            {$set:{highScore:curr}},
+            {new:true});
+      }
       res.status(200).json({message:"all ok"})
    }catch(err){
-      console.log(`${err}`)
+      console.log("${err}")
    }
 })
 module.exports=router
