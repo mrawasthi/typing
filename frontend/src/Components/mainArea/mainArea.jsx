@@ -28,15 +28,19 @@ const [visibleButtonDiff, setVisibleButtonDiff]=React.useState({
     color: "dark",
     text: "Difficulty"
 })
+const [timerTrue,setTimerTrue]=React.useState(0)
 
   const dataArray = textData.split(" ").filter(Boolean);
   function updateText() {
     if (!running) {
       setRunning(true);
+      setTimerTrue(timer)
     }
+
   }
    console.log(errWordCount)
    console.log(state)
+   console.log(timerTrue)
    
   function handleLastKey(e) {
     const currText = e.target.value
@@ -116,7 +120,7 @@ const [visibleButtonDiff, setVisibleButtonDiff]=React.useState({
             results={{correctCharCount, errorCount, errWordCount, correctWord,
             setTextData,setState,setCurrInd,setCorrectCharCount,setErrorCharCount,
             setErrorCount,setCorrectWord,setWordInd,setBackspace,setTimer,setRunning,
-            setVisibleButtonDiff, setVisibleButtonTimer}}
+            setVisibleButtonDiff, setVisibleButtonTimer,timerTrue,currInd}}
             setShowPopup={setShowPopup}
           />
         }

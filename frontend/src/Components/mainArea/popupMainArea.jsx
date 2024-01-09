@@ -6,8 +6,9 @@ const Modal = (props) => {
     const {correctCharCount, errorCount, errWordCount, correctWord,
         setTextData,setState,setCurrInd,setCorrectCharCount,setErrorCharCount,
         setErrorCount,setCorrectWord,setWordInd,setBackspace,setTimer,setRunning,
-        setVisibleButtonDiff, setVisibleButtonTimer
+        setVisibleButtonDiff, setVisibleButtonTimer,timerTrue,currInd
     }=props.results
+    console.log(timerTrue)
     const setShowPopup=props.setShowPopup
     function onClose(){
         setShowPopup(false)
@@ -31,14 +32,19 @@ const Modal = (props) => {
             text: "Timer"
         })
     }
+    const accuracy=Math.floor((correctWord/currInd)*100)
+    const minute=timerTrue/60
+    const WPM=Math.floor(correctWord/minute)
+    const errors=currInd-correctWord
+    const totalcnt=errorCount+correctCharCount
   return (
     <div className="modal">
       <div className="modal-content">
         <h2>Typing Test Results</h2>
-        <p>WPM: {correctWord}</p>
-        <p>Accuracy: {correctWord}%</p>
-        <p>Errors: {errorCount}</p>
-        <p>Characters Typed: {errorCount+correctCharCount}</p>
+        <p>WPM: {WPM}</p>
+        <p>Accuracy: {accuracy}%</p>
+        <p>Errors: {errors}</p>
+        <p>Characters Typed: {totalcnt}</p>
         <button onClick={onClose}>Close</button>
       </div>
     </div>

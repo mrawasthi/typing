@@ -29,7 +29,7 @@ const leftPane = (props)=>{
                 return {...prev, text: "1 MINUTE"};
             })
             const setTimer=props.setTimer
-            setTimer(10)
+            setTimer(60)
         }
         else if(eventid==2){
             setVisibleButtonTimer((prev)=>{
