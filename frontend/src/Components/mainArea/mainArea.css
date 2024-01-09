@@ -52,16 +52,15 @@
     background-color: transparent;
     color:#323232;
     overflow-wrap: break-word;
+    word-wrap: break-word;
+    height: 100px;
 }
 .textarea-div{
     resize: none;
     border: none;
     outline: none;
     background-color: transparent;
-    top:20px;
-    left:20px;
-    right: 20px;
-    bottom: 20px;
+    padding: 15px;
     font-size: 18px;
     position: absolute;
     text-align: left;
@@ -69,12 +68,13 @@
     user-select: none;
     pointer-events: none;
     color: white;
-    overflow-wrap: break-word;
     cursor: auto;
 }
 .super-list{
     font-size: 0px;
     padding: 0px;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 .super-list li{
     font-size: 18px;
