@@ -24,6 +24,10 @@ const friendData = [
   { name: 'Jane Smith', email: 'jane.smith@example.com' },
   { name: 'Bob Johnson', email: 'bob.johnson@example.com' },
   { name: 'Alice Williams', email: 'alice.williams@example.com' },
+  { name: 'John Doe', email: 'john.doe@example1.com' },
+  { name: 'Jane Smith', email: 'jane.smith@example.com' },
+  { name: 'Bob Johnson', email: 'bob.johnson@example.com' },
+  { name: 'Alice Williams', email: 'alice.williams@example.com' },
   // Add more entries as needed
 ];
 
@@ -60,18 +64,61 @@ const Friends = () => {
               <img src={search1} alt="Search" className="medal" />
             </button>
           </div>
+          {!searchToggle && 
+            <div className="friends-area-container">
+            <div className="friends-area">
+              {friendData.map((friend, index) => (
+                <div key={index} className="search-box search-friend-out">
+                  <div className="search-out">
+                    <div className="search-item">{friend.name}</div>
+                    <div className="search-item">{friend.email}</div>
+                  </div>
+                  <button type="button" className="btn btn-danger request-button">
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+            </div>
+          }
+          
           {searchToggle && (
             <div className="showfriend">
               {filteredFriends.map((friend, index) => (
                 <div key={index} className="search-box">
-                  <div className="search-item">{friend.name}</div>
-                  <div className="search-item">{friend.email}</div>
+                  <div className="search-out">
+                    <div className="search-item">{friend.name}</div>
+                    <div className="search-item">{friend.email}</div>
+                  </div>
+                  <button type="button" class="btn btn-success request-button" >Request</button>
                 </div>
               ))}
             </div>
           )}
         </div>
-        <div className="right-friend"></div>
+        <div className="right-friend">
+          <div className="heading">PENDING REQUESTS</div>
+          <div className="friends-area-container right-friend-request">
+              <div className="friends-area">
+                {friendData.map((friend, index) => (
+                  <div key={index} className="search-box search-friend-out">
+                    <div className="search-out">
+                      <div className="search-item">{friend.name}</div>
+                      <div className="search-item">{friend.email}</div>
+                    </div>
+                    <div className="requests">
+                    <button type="button" className="btn btn-success request-button2">
+                      ACCEPT
+                    </button>
+                    <button type="button" className="btn btn-danger request-button2">
+                      REJECT
+                    </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+        </div>
       </div>
     </div>
   );
