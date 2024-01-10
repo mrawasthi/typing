@@ -15,7 +15,10 @@ const Modal = (props) => {
     console.log(user.image)
     console.log(user._id)
     const id=user._id
-    const accuracy=Math.floor((correctWord/currInd)*100)
+    let accuracy=Math.floor((correctWord/currInd)*100)
+    if(!currInd){
+      accuracy=0
+    }
     const minute=timerTrue/60
     const WPM=Math.floor(correctWord/minute)
     const errors=currInd-correctWord
@@ -71,12 +74,14 @@ const Modal = (props) => {
   return (
     <div className="modal">
       <div className="modal-content">
-        <h2>Typing Test Results</h2>
-        <p>WPM: {WPM}</p>
-        <p>Accuracy: {accuracy}%</p>
-        <p>Errors: {errors}</p>
-        <p>Characters Typed: {totalcnt}</p>
-        <button onClick={onClose}>Close</button>
+        <div className="data-heading">Typing Test Results</div>
+        <div className="modal-data">
+          <div className="data">WPM: {WPM}</div>
+          <div className="data">Accuracy: {accuracy}%</div>
+          <div className="data">Errors: {errors}</div>
+          <div className="data">Characters Typed: {totalcnt}</div>
+        </div>
+        <button className="btn btn-dark cancel-btn" onClick={onClose}>Close</button>
       </div>
     </div>
   );

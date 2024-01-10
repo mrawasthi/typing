@@ -23,10 +23,11 @@ const Leaderboard = () => {
   ];
 
   return (
+    <div className="leaderboard-upper-container">
     <div className="leaderboard-container">
-      <h2 className="text-center mb-4">Leaderboard</h2>
+      <div className="text-center table-div">Leaderboard</div>
       <table className="table">
-        <thead>
+        <thead className="table-heading">
           <tr>
             <th scope="col">Rank</th>
             <th className="name" scope="col">Name</th>
@@ -47,6 +48,7 @@ const Leaderboard = () => {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   );
 };

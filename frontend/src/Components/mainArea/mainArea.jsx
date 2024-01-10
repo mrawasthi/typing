@@ -165,7 +165,6 @@ const [timerTrue,setTimerTrue]=React.useState(0)
           </textarea>
           }
         </div>
-        <div className="bottomPane"></div>
       </div>
     </div>
   );
