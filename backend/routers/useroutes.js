@@ -203,4 +203,9 @@ router.post('/highscore/:id',authenticate,async(req,res)=>{
       console.log("${err}")
    }
 })
+router.get('/leaderboard-backend',authenticate,async(req,res)=>{
+      const allUsers=await User.find({})
+      let sortedData=[...allUsers].sort((a,b)=>b.highScore-a.highScore)
+      res.status(200).json({msg:sortedData})
+})
 module.exports=router

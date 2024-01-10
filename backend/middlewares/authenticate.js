@@ -26,7 +26,7 @@ const Authenticate = async (req, res, next) => {
       req.userID=userData._id
       next()
    } catch (err) {
-      console.error('Authentication Error:', err);
+      console.error('Authentication Error: here i am', err);
       res.status(201).send("Unauthorized access");
    }
 };

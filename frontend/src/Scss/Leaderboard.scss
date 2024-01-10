@@ -1,9 +1,10 @@
 /* Leaderboard.css */
 .leaderboard-container {
+  position: relative;
   max-width: 800px;
   margin: 0 auto;
   color: #ffffff;
-  height:fit-content;
+  height:80%;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   padding: 10px;
@@ -11,13 +12,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  resize: none;
 }
 
 .table {
   border-collapse: collapse;
-  height: fit-content;
+  max-height: 100px;
   margin: 10px;
   width: 100%;
+  overflow-y: auto;
+  resize: none;
 }
 tr{
   display: flex;
@@ -56,10 +60,18 @@ th {
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   background: black;
+  height: 70px;
 }
-
-
-
-
+tbody{
+  height: 100%;
+  overflow: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.table-container {
+  resize: none; /* Adjust the max height as needed */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
 

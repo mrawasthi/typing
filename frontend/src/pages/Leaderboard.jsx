@@ -5,6 +5,7 @@ import goldmedal from "../image/goldmedal.png"
 import silvermedal from "../image/silvermedal.png"
 import bronzemedal from "../image/bronzemedal.png"
 import award from "../image/award.png"
+import { useAuth } from '../store/Auth';
 
 const Leaderboard = () => {
   // Mock data (replace this with actual data fetching)
@@ -21,11 +22,38 @@ const Leaderboard = () => {
     { rank: 9, name: 'Grace Lee', speed: 36, accuracy: 83 },
     { rank: 10, name: 'Henry Davis', speed: 35, accuracy: 82 },
   ];
+  const [leaderBoard,setLeaderBoard]=React.useState([])
+  const {token} =useAuth()
+  const leaderboardranks=async()=>{
+    try{
+       const response=await fetch("http://localhost:3000/leaderboard-backend",{
+        method:"GET",
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+       })
+       if(response) {
+        const data=await response.json()
+        //console.log(data.msg)
+        let obj=data.msg
+        //console.log(obj)
+        setLeaderBoard(obj)
+       }               
+      }catch(error){
+        console.log("${error}")
+     }
+   }
 
+   React.useEffect(()=>{
+    leaderboardranks()
+},[])
+   console.log(leaderBoard)
+   let rank=1;
   return (
     <div className="leaderboard-upper-container">
     <div className="leaderboard-container">
       <div className="text-center table-div">Leaderboard</div>
+      <div className="table-container">
       <table className="table">
         <thead className="table-heading">
           <tr>
@@ -37,17 +65,18 @@ const Leaderboard = () => {
           </tr>
         </thead>
         <tbody>
-          {leaderboardData.map((leader) => (
-            <tr className="row-table" key={leader.rank}>
+          {leaderBoard.map((leader) => (
+            <tr className="row-table" key={leader._id}>
             
-              <td className="leaderboard">{leader.rank <= 3 ? renderMedal(leader.rank) : leader.rank}</td>
+              <td className="leaderboard">{rank <= 3 ? renderMedal(rank++) : rank++}</td>
               <td className="name">{leader.name}</td>
-              <td>{leader.speed}</td>
-              <td>{leader.accuracy}</td>
+              <td>{leader.highScore}</td>
+              <td>{leader.highScore}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      </div>
     </div>
     </div>
   );
