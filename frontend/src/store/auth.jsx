@@ -3,7 +3,7 @@ import {createContext, useContext,useState,useEffect} from "react"
 export const AuthContext=createContext();
 
 export const AuthProvider= ({children})=>{
-    const [token,setToken]=useState("")
+    const [token,setToken]=useState(localStorage.getItem("token"))
     const [islogged,setislogged]=useState(false)
     const dummy={
         _id:"hello",
@@ -38,7 +38,7 @@ export const AuthProvider= ({children})=>{
             console.log(user)
            }               
         }catch(error){
-            console.log("${error}")
+            console.log(`${error}`)
         }
      }
     

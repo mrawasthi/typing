@@ -51,7 +51,7 @@ export default function Login() {
          setUser(obj)
         }               
      }catch(error){
-         console.log("${error}")
+         console.log(`${error}`)
      }
       
       //localStorage.setItem("token",data.token)

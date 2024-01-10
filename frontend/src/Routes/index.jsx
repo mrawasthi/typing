@@ -4,6 +4,7 @@ import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Leaderboard from "../pages/Leaderboard";
 import Profile from "../pages/Profile";
+import Friends from "../pages/Friends";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
   {
     path: "/leaderboard",
     element: <Leaderboard/>,
+  },
+  {
+    path: "/friends",
+    element: <Friends/>,
   },
   
 ]);

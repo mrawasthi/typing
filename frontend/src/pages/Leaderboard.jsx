@@ -24,6 +24,7 @@ const Leaderboard = () => {
   ];
   const [leaderBoard,setLeaderBoard]=React.useState([])
   const {token} =useAuth()
+  console.log(token)
   const leaderboardranks=async()=>{
     try{
        const response=await fetch("http://localhost:3000/leaderboard-backend",{
