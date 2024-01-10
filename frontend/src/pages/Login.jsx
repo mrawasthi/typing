@@ -7,7 +7,7 @@ import '../Scss/Login.scss';
 
 export default function Login() {
   const navigate = useNavigate();
-  const {storeTokenInLS}=useAuth()
+  const {storeTokenInLS,user,setUser,token,setToken}=useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -34,7 +34,26 @@ export default function Login() {
     if(res.ok){
       const data=await res.json();
       console.log(data)
+      setToken(data.token)
       storeTokenInLS(data.token)
+      try{
+        const response=await fetch("http://localhost:3000/check",{
+         method:"GET",
+         headers:{
+             Authorization:`Bearer ${data.token}`
+         }
+        })
+        if(response) {
+         const data=await response.json()
+         console.log(data.msg)
+         let obj=data.msg
+         console.log(obj)
+         setUser(obj)
+        }               
+     }catch(error){
+         console.log("${error}")
+     }
+      
       //localStorage.setItem("token",data.token)
       window.alert("loggedin successfully")
       navigate("/")

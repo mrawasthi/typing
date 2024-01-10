@@ -3,7 +3,7 @@ import {createContext, useContext,useState,useEffect} from "react"
 export const AuthContext=createContext();
 
 export const AuthProvider= ({children})=>{
-    const [token,setToken]=useState(localStorage.getItem("token"))
+    const [token,setToken]=useState("")
     const [islogged,setislogged]=useState(false)
     const dummy={
         _id:"hello",
@@ -47,7 +47,7 @@ export const AuthProvider= ({children})=>{
     },[])
    return(
 
-   <AuthContext.Provider value={{token,user,checking,storeTokenInLS,LogoutUser}}>
+   <AuthContext.Provider value={{token,user,checking,storeTokenInLS,LogoutUser,setUser,setToken}}>
        {children}
    </AuthContext.Provider>
    ) 
