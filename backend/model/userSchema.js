@@ -39,6 +39,11 @@ const userSchema=new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId, ref: 'User' 
         }
     ],
+    pendingRequestSent: [
+        {
+            type: mongoose.Schema.Types.ObjectId, ref: 'User' 
+        }
+    ],
     highScore:{
         type:Number,
         default:0

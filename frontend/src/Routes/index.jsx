@@ -25,11 +25,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/leaderboard",
-    element: <Leaderboard/>,
+    element: <Leaderboard />,
   },
   {
     path: "/friends",
-    element: <Friends/>,
+    element: <Friends />,
   },
   
 ]);

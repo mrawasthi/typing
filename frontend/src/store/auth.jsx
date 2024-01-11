@@ -4,11 +4,7 @@ export const AuthContext=createContext();
 
 export const AuthProvider= ({children})=>{
     const [token,setToken]=useState(localStorage.getItem("token"))
-    const [islogged,setislogged]=useState(false)
-    const dummy={
-        _id:"hello",
-        name:"ayush"
-    }
+    
     const [user,setUser]=useState({})
     let checking=!!token
     const storeTokenInLS=(serverToken)=>{
