@@ -3,39 +3,12 @@ import React, { useState } from 'react';
 import '../Scss/Friends.scss';
 import search1 from "../image/search1.png";
 
-const friendData = [
-  { name: 'John Doe', email: 'john.doe@example.com' },
-  { name: 'John Doe', email: 'john.doe@example1.com' },
-  { name: 'Jane Smith', email: 'jane.smith@example.com' },
-  { name: 'Bob Johnson', email: 'bob.johnson@example.com' },
-  { name: 'Alice Williams', email: 'alice.williams@example.com' },
-  { name: 'John Doe', email: 'john.doe@example.com' },
-  { name: 'John Doe', email: 'john.doe@example1.com' },
-  { name: 'Jane Smith', email: 'jane.smith@example.com' },
-  { name: 'Bob Johnson', email: 'bob.johnson@example.com' },
-  { name: 'Alice Williams', email: 'alice.williams@example.com' },
-  { name: 'John Doe', email: 'john.doe@example.com' },
-  { name: 'John Doe', email: 'john.doe@example1.com' },
-  { name: 'Jane Smith', email: 'jane.smith@example.com' },
-  { name: 'Bob Johnson', email: 'bob.johnson@example.com' },
-  { name: 'Alice Williams', email: 'alice.williams@example.com' },
-  { name: 'John Doe', email: 'john.doe@example.com' },
-  { name: 'John Doe', email: 'john.doe@example1.com' },
-  { name: 'Jane Smith', email: 'jane.smith@example.com' },
-  { name: 'Bob Johnson', email: 'bob.johnson@example.com' },
-  { name: 'Alice Williams', email: 'alice.williams@example.com' },
-  { name: 'John Doe', email: 'john.doe@example1.com' },
-  { name: 'Jane Smith', email: 'jane.smith@example.com' },
-  { name: 'Bob Johnson', email: 'bob.johnson@example.com' },
-  { name: 'Alice Williams', email: 'alice.williams@example.com' },
-  // Add more entries as needed
-];
-
 const Friends = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredFriends, setFilteredFriends] = useState([]);
   const [searchToggle, setSearchToggle] = useState(false);
-
+  const [friendData, setfriendData]=useState([])
+  
   const handleSearch = () => {
     const filtered = friendData.filter(friend =>
       friend.name.toLowerCase().includes(searchTerm.toLowerCase())
