@@ -31,7 +31,9 @@ const CustomSidePane = ({ show, handleClose }) => {
         </button>
         <button type="button" class="btn border-0 btn-lg active text-left" onClick={logout}>LogOut
         </button>
-        <button type="button" class="btn border-0 btn-lg active text-left">Contact Us</button>
+        <button type="button" class="btn border-0 btn-lg active text-left">
+          <Link to='/contactus' style={{ textDecoration: 'none', color: 'inherit' }}>ContactUs</Link>
+        </button>
       </Offcanvas.Body>
     </Offcanvas>
   );

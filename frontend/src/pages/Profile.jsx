@@ -62,7 +62,7 @@ const Profile = () => {
                 <div className="profile-lower profile-lower2">
                   <div className="profile-lower-inner1 upload-text">
                     <p className="font-weight-bold">Recent</p>
-                    <h6 className="text-muted">Best Score</h6>
+                    <h6 className="text-muted">{user.highScore}</h6>
                   </div>
                   <div className="profile-lower-inner2 upload-text">
                     <p className="font-weight-bold">Accuracy</p>

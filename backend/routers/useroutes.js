@@ -97,7 +97,7 @@ router.get('/check',authenticate,(req,res)=>{
 //friend routes
 router.post('/cancelRequest/:id', authenticate, async(req, res)=>{
    try{
-      const friendUser=await User.findOne({_id: req.body.id})
+      const friendUser=await User.findOne({_id: req.body.ide})
       const user=await User.findOne({_id: req.params.id})
       const usertoFriend = await User.findByIdAndUpdate(
          user._id,
@@ -117,7 +117,7 @@ router.post('/cancelRequest/:id', authenticate, async(req, res)=>{
 
 router.post('/sendRequest/:id', authenticate, async(req,res)=>{
    try{
-      const friendUser=await User.findOne({_id: req.body.id})
+      const friendUser=await User.findOne({_id: req.body.ide})
       const user=await User.findOne({_id: req.params.id})
       const usertoFriend = await User.findByIdAndUpdate(
          user._id,
@@ -136,7 +136,9 @@ router.post('/sendRequest/:id', authenticate, async(req,res)=>{
 })
 router.post('/acceptRequest/:id', authenticate, async(req,res)=>{
    try{
-      const friendUser=await User.findOne({_id: req.body.id})
+      console.log(req.body.ide)
+      console.log(req.params.id)
+      const friendUser=await User.findOne({_id: req.body.ide})
       const user=await User.findOne({_id: req.params.id})
       const usertoFriend = await User.findByIdAndUpdate(
          user._id,
@@ -165,7 +167,7 @@ router.post('/acceptRequest/:id', authenticate, async(req,res)=>{
 })
 router.post('/unfriend/:id', authenticate, async(req, res)=>{
    try{
-      const friendUser=await User.findOne({_id: req.body.id})
+      const friendUser=await User.findOne({_id: req.body.ide})
       const user=await User.findOne({_id: req.params.id})
       const usertoFriend = await User.findByIdAndUpdate(
          user._id,

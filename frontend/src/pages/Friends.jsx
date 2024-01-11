@@ -8,64 +8,65 @@ const Friends = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredFriends, setFilteredFriends] = useState([]);
   const [searchToggle, setSearchToggle] = useState(false);
-  const [friendData, setFriendData]=useState([])
-  const [currFriend,setCurrFriend]=useState([])
-  const [currPending,setCurrPending]=useState([])
+  const [friendData, setFriendData] = useState([])
+  const [currFriend, setCurrFriend] = useState([])
+  const [currPending, setCurrPending] = useState([])
+  const [getUser,setGetUser]=useState({})
 
-  const {token,user} =useAuth()
+  const { token, user } = useAuth()
   console.log(user)
   console.log(token)
-  const id=user._id
-  const [getUser,setgetUser]=useState({})
-  const firstRender=async()=>{             
+  const id = user._id
+  const firstRender = async () => {
+    
     try {
-      const response=await fetch(`http://localhost:3000/myfriends/${id}`,{
-        method:"GET",
-        headers:{
-            Authorization:`Bearer ${token}`
+      const response = await fetch(`http://localhost:3000/myfriends/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
         }
       })
-      if(response) {
-        const data=await response.json()
-        let obj=data.msg
+      if (response) {
+        const data = await response.json()
+        let obj = data.msg
         console.log(obj)
         setCurrFriend(obj)
-       }    
+      }
 
-       const response2=await fetch(`http://localhost:3000/getfriends/${id}`,{
-        method:"GET",
-        headers:{
-            Authorization:`Bearer ${token}`
+      const response2 = await fetch(`http://localhost:3000/getfriends/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-       })
-       if(response2) {
-        const data=await response2.json()
-        let obj=data.msg
-       console.log(obj)
-       setFriendData(obj)
-       }    
+      })
+      if (response2) {
+        const data = await response2.json()
+        let obj = data.msg
+        console.log(obj)
+        setFriendData(obj)
+      }
 
-       const response3=await fetch(`http://localhost:3000/mypendingrequest/${id}`,{
-        method:"GET",
-        headers:{
-            Authorization:`Bearer ${token}`
+      const response3 = await fetch(`http://localhost:3000/mypendingrequest/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-       })
-       if(response3) {
-        const data=await response3.json()
-        let obj=data.msg
+      })
+      if (response3) {
+        const data = await response3.json()
+        let obj = data.msg
         setCurrPending(obj)
         console.log(obj)
-       }    
+      }
     } catch (error) {
-     console.log(`${error}`) 
+      console.log(`${error}`)
     }
   }
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     firstRender()
-  },[])
-  
+  }, [])
+
   const handleSearch = () => {
     const filtered = friendData.filter(friend =>
       friend.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -73,6 +74,105 @@ const Friends = () => {
     setSearchToggle(prev => !prev);
     setFilteredFriends(filtered);
   };
+  const acceptRequest = async (ide) => {
+    console.log(ide)
+    let sendid=ide
+    try {
+      const res = await fetch(`http://localhost:3000/acceptRequest/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          ide
+      })
+      })
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data)
+        
+      }
+
+      else {
+        console.log("some error")
+      }
+    } catch (err) {
+      console.log(`${err}`)
+    }
+  }
+  const rejectRequest = async (ide) => {
+    try {
+      const res = await fetch(`http://localhost:3000/cancelRequest/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          ide
+        })
+      })
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data)
+        //localStorage.setItem("token",data.token)
+      }
+      else {
+        console.log("some error")
+      }
+    } catch (err) {
+      console.log("error")
+    }
+  }
+  const removeFriend = async (ide) => {
+    try {
+      const res = await fetch(`http://localhost:3000/unfriend/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          ide
+        })
+      })
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data)
+        //localStorage.setItem("token",data.token)
+      }
+      else {
+        console.log("some error")
+      }
+    } catch (err) {
+      console.log("error")
+    }
+  }
+  const sendRequest = async (ide) => {
+    try {
+      const res = await fetch(`http://localhost:3000/sendRequest/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          ide
+        })
+      })
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data)
+        //localStorage.setItem("token",data.token)
+      }
+      else {
+        console.log("some error")
+      }
+    } catch (err) {
+      console.log("error")
+    }
+  }
 
   return (
     <div className="upper-container">
@@ -94,24 +194,24 @@ const Friends = () => {
               <img src={search1} alt="Search" className="medal" />
             </button>
           </div>
-          {!searchToggle && 
+          {!searchToggle &&
             <div className="friends-area-container">
-            <div className="friends-area">
-              {currFriend.map((friend, index) => (
-                <div key={index} className="search-box search-friend-out">
-                  <div className="search-out">
-                    <div className="search-item">{friend.name}</div>
-                    <div className="search-item">{friend.email}</div>
+              <div className="friends-area">
+                {currFriend.map((friend, index) => (
+                  <div key={index} className="search-box search-friend-out">
+                    <div className="search-out">
+                      <div className="search-item">{friend.name}</div>
+                      <div className="search-item">{friend.email}</div>
+                    </div>
+                    <button type="button" className="btn btn-danger request-button" onClick={() => removeFriend(friend._id)}>
+                      Remove
+                    </button>
                   </div>
-                  <button type="button" className="btn btn-danger request-button">
-                    Remove
-                  </button>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
             </div>
           }
-          
+
           {searchToggle && (
             <div className="showfriend">
               {filteredFriends.map((friend, index) => (
@@ -120,7 +220,7 @@ const Friends = () => {
                     <div className="search-item">{friend.name}</div>
                     <div className="search-item">{friend.email}</div>
                   </div>
-                  <button type="button" class="btn btn-success request-button" >Request</button>
+                  <button type="button" class="btn btn-success request-button" onClick={() => sendRequest(friend._id)}>Request</button>
                 </div>
               ))}
             </div>
@@ -129,25 +229,38 @@ const Friends = () => {
         <div className="right-friend">
           <div className="heading">PENDING REQUESTS</div>
           <div className="friends-area-container right-friend-request">
-              <div className="friends-area">
-                {currPending.map((friend, index) => (
-                  <div key={index} className="search-box search-friend-out">
-                    <div className="search-out">
-                      <div className="search-item">{friend.name}</div>
-                      <div className="search-item">{friend.email}</div>
-                    </div>
-                    <div className="requests">
-                    <button type="button" className="btn btn-success request-button2">
-                      ACCEPT
-                    </button>
-                    <button type="button" className="btn btn-danger request-button2">
-                      REJECT
-                    </button>
-                    </div>
+            <div className="friends-area">
+              {currPending.map((friend, index) => (
+                <div key={index} className="search-box search-friend-out">
+                  <div className="search-out">
+                    <div className="search-item">{friend.name}</div>
+                    <div className="search-item">{friend.email}</div>
                   </div>
-                ))}
-              </div>
+                  <div className="requests">
+                    {friend && friend._id && (
+                      <>
+                        <button
+                          type="button"
+                          className="btn btn-success request-button2"
+                          onClick={() => acceptRequest(friend._id)}
+                        >
+                          ACCEPT
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-danger request-button2"
+                          onClick={() => rejectRequest(friend._id)}
+                        >
+                          REJECT
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
+
             </div>
+          </div>
         </div>
       </div>
     </div>

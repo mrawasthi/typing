@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Leaderboard from "../pages/Leaderboard";
 import Profile from "../pages/Profile";
 import Friends from "../pages/Friends";
+import Contactus from "../pages/Contactus";
 
 export const router = createBrowserRouter([
   {
@@ -31,5 +32,8 @@ export const router = createBrowserRouter([
     path: "/friends",
     element: <Friends />,
   },
-  
+  {
+    path: "/contactus",
+    element: <Contactus />,
+  },
 ]);
