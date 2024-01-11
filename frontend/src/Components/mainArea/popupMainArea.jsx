@@ -27,7 +27,7 @@ const Modal = (props) => {
     console.log(token)
     const onClose=async()=>{
         try {
-            const res = await fetch(`http://localhost:3000/highscore/${id}`,{
+            const res = await fetch(`http://localhost:3000/highscore`,{
             method:"POST",
             headers:{
               "Content-Type":"application/json",
@@ -40,7 +40,6 @@ const Modal = (props) => {
           if(res.ok){
             const data=await res.json();
             console.log(data)
-            //localStorage.setItem("token",data.token)
            } 
           
           else{

@@ -11,16 +11,15 @@ const Friends = () => {
   const [friendData, setFriendData] = useState([])
   const [currFriend, setCurrFriend] = useState([])
   const [currPending, setCurrPending] = useState([])
-  const [getUser,setGetUser]=useState({})
+  const [user,setGetUser]=useState({})
 
-  const { token, user } = useAuth()
+  const { token,setUser } = useAuth()
   console.log(user)
   console.log(token)
   const id = user._id
   const firstRender = async () => {
-    
     try {
-      const response = await fetch(`http://localhost:3000/myfriends/${id}`, {
+      const response = await fetch(`http://localhost:3000/myfriends`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
@@ -33,7 +32,7 @@ const Friends = () => {
         setCurrFriend(obj)
       }
 
-      const response2 = await fetch(`http://localhost:3000/getfriends/${id}`, {
+      const response2 = await fetch(`http://localhost:3000/getfriends`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
@@ -46,7 +45,7 @@ const Friends = () => {
         setFriendData(obj)
       }
 
-      const response3 = await fetch(`http://localhost:3000/mypendingrequest/${id}`, {
+      const response3 = await fetch(`http://localhost:3000/mypendingrequest`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
@@ -62,6 +61,7 @@ const Friends = () => {
       console.log(`${error}`)
     }
   }
+  
 
   React.useEffect(() => {
     firstRender()
@@ -78,7 +78,7 @@ const Friends = () => {
     console.log(ide)
     let sendid=ide
     try {
-      const res = await fetch(`http://localhost:3000/acceptRequest/${id}`, {
+      const res = await fetch(`http://localhost:3000/acceptRequest`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const Friends = () => {
   }
   const rejectRequest = async (ide) => {
     try {
-      const res = await fetch(`http://localhost:3000/cancelRequest/${id}`, {
+      const res = await fetch(`http://localhost:3000/cancelRequest`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -127,7 +127,7 @@ const Friends = () => {
   }
   const removeFriend = async (ide) => {
     try {
-      const res = await fetch(`http://localhost:3000/unfriend/${id}`, {
+      const res = await fetch(`http://localhost:3000/unfriend`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -151,7 +151,7 @@ const Friends = () => {
   }
   const sendRequest = async (ide) => {
     try {
-      const res = await fetch(`http://localhost:3000/sendRequest/${id}`, {
+      const res = await fetch(`http://localhost:3000/sendRequest`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

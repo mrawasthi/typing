@@ -95,10 +95,11 @@ router.get('/check',authenticate,(req,res)=>{
    }
 })
 //friend routes
-router.post('/cancelRequest/:id', authenticate, async(req, res)=>{
+router.post('/cancelRequest', authenticate, async(req, res)=>{
+   const id=req.userID
    try{
       const friendUser=await User.findOne({_id: req.body.ide})
-      const user=await User.findOne({_id: req.params.id})
+      const user=await User.findOne({_id: id})
       const usertoFriend = await User.findByIdAndUpdate(
          user._id,
          { $pull: { pendingRequest:friendUser._id} },
@@ -115,10 +116,12 @@ router.post('/cancelRequest/:id', authenticate, async(req, res)=>{
    }
 })
 
-router.post('/sendRequest/:id', authenticate, async(req,res)=>{
+router.post('/sendRequest', authenticate, async(req,res)=>{
+   const id=req.userID
    try{
+      
       const friendUser=await User.findOne({_id: req.body.ide})
-      const user=await User.findOne({_id: req.params.id})
+      const user=await User.findOne({_id: id})
       const usertoFriend = await User.findByIdAndUpdate(
          user._id,
          { $push: { pendingRequestSent:friendUser._id} },
@@ -134,12 +137,13 @@ router.post('/sendRequest/:id', authenticate, async(req,res)=>{
       console.log("User not found")
    }
 })
-router.post('/acceptRequest/:id', authenticate, async(req,res)=>{
+router.post('/acceptRequest', authenticate, async(req,res)=>{
+   const id=req.userID
    try{
       console.log(req.body.ide)
       console.log(req.params.id)
       const friendUser=await User.findOne({_id: req.body.ide})
-      const user=await User.findOne({_id: req.params.id})
+      const user=await User.findOne({_id: id})
       const usertoFriend = await User.findByIdAndUpdate(
          user._id,
          { $push: { friends:friendUser._id} },
@@ -165,10 +169,11 @@ router.post('/acceptRequest/:id', authenticate, async(req,res)=>{
       console.log(`${err}`)
    }
 })
-router.post('/unfriend/:id', authenticate, async(req, res)=>{
+router.post('/unfriend', authenticate, async(req, res)=>{
+   const id=req.userID
    try{
       const friendUser=await User.findOne({_id: req.body.ide})
-      const user=await User.findOne({_id: req.params.id})
+      const user=await User.findOne({_id: id})
       const usertoFriend = await User.findByIdAndUpdate(
          user._id,
          { $pull: { friends:friendUser._id} },
@@ -184,10 +189,10 @@ router.post('/unfriend/:id', authenticate, async(req, res)=>{
       console.log(`${err}`)
    }
 })
-router.post('/highscore/:id',authenticate,async(req,res)=>{
+router.post('/highscore',authenticate,async(req,res)=>{
    try{
-      const user=await User.findOne({_id:req.params.id})
-      const id=req.params.id
+      const user=await User.findOne({_id:req.userID})
+      const id=req.userID
       const currentScore=req.body.score
       const highscore=user.highScore
       console.log(currentScore)
@@ -208,9 +213,11 @@ router.get('/leaderboard-backend',authenticate,async(req,res)=>{
       let sortedData=[...allUsers].sort((a,b)=>b.highScore-a.highScore)
       res.status(200).json({msg:sortedData})
 })
-router.get('/getfriends/:id', authenticate, async(req, res)=>{
+router.get('/getfriends', authenticate, async(req, res)=>{
+   const id=req.userID
+   console.log(id)
    try{
-      const currUser=await User.findOne({_id:req.params.id})
+      const currUser=await User.findOne({_id:id})
       const pendingRequest=currUser.pendingRequest
       const currFriends=currUser.friends
       const pendingRequestSent=currUser.pendingRequestSent
@@ -220,9 +227,10 @@ router.get('/getfriends/:id', authenticate, async(req, res)=>{
       res.status(400).json({msg: "error"})
    }
 })
-router.get('/myfriends/:id',authenticate,async(req,res)=>{
+router.get('/myfriends',authenticate,async(req,res)=>{
+   const id=req.userID
    try {
-      const currUser=await User.findOne({_id:req.params.id})
+      const currUser=await User.findOne({_id:id})
       const currFriends=await currUser.populate('friends')
       res.status(200).json({msg:currFriends.friends})
          
@@ -230,9 +238,10 @@ router.get('/myfriends/:id',authenticate,async(req,res)=>{
          res.status(400).json({msg:"Error"})
    }
 })
-router.get('/mypendingrequest/:id',authenticate,async(req,res)=>{
+router.get('/mypendingrequest',authenticate,async(req,res)=>{
+   const id=req.userID
    try {
-      const currUser=await User.findOne({_id:req.params.id})
+      const currUser=await User.findOne({_id:id})
       const pendingRequest=await currUser.populate('pendingRequest')
       res.status(200).json({msg:pendingRequest.pendingRequest})
    } catch (error) {

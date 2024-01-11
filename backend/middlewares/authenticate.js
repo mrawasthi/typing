@@ -24,6 +24,7 @@ const Authenticate = async (req, res, next) => {
       req.user=userData
       req.token=token
       req.userID=userData._id
+      console.log(req.userID)
       next()
    } catch (err) {
       console.error('Authentication Error: here i am', err);
