@@ -5,10 +5,9 @@ import dummyData from "../../data.js"
 import Timer from './Timer.jsx'
 
 const leftPane = (props)=>{
-
     const [toggleButtonDifficulty, setToggleButtonDifficulty]=React.useState(false);
     const [toggleButtonTimer, setToggleButtonTimer]=React.useState(false);
-    const {setVisibleButtonDiff, setVisibleButtonTimer,visibleButtonTimer,visibleButtonDiff}=props
+    const {setVisibleButtonDiff, setVisibleButtonTimer,visibleButtonTimer,visibleButtonDiff, setFirstTimer}=props
 
     let randomInt=(Math.floor(Math.random()*10))%5;
     function handleToggleDifficulty(){
@@ -30,6 +29,7 @@ const leftPane = (props)=>{
             })
             const setTimer=props.setTimer
             setTimer(60)
+            setFirstTimer(60)
         }
         else if(eventid==2){
             setVisibleButtonTimer((prev)=>{
@@ -37,6 +37,7 @@ const leftPane = (props)=>{
             })
             const setTimer=props.setTimer
             setTimer(120)
+            setFirstTimer(120)
         }
         else if(eventid==3){
             setVisibleButtonTimer((prev)=>{
@@ -44,6 +45,7 @@ const leftPane = (props)=>{
             })
             const setTimer=props.setTimer
             setTimer(300)
+            setFirstTimer(300)
         }
     }
     function changeStateDiff(e){

@@ -7,9 +7,9 @@ const Modal = (props) => {
     const {correctCharCount, errorCount, errWordCount, correctWord,
         setTextData,setState,setCurrInd,setCorrectCharCount,setErrorCharCount,
         setErrorCount,setCorrectWord,setWordInd,setBackspace,setTimer,setRunning,
-        setVisibleButtonDiff, setVisibleButtonTimer,timerTrue,currInd
+        setVisibleButtonDiff, setVisibleButtonTimer,firstTimer,currInd
     }=props.results
-    console.log(timerTrue)
+    console.log(firstTimer)
     const setShowPopup=props.setShowPopup
     const {user,token} =useAuth()
     console.log(user.image)
@@ -19,7 +19,7 @@ const Modal = (props) => {
     if(!currInd){
       accuracy=0
     }
-    const minute=timerTrue/60
+    const minute=firstTimer/60
     const WPM=Math.floor(correctWord/minute)
     const errors=currInd-correctWord
     const totalcnt=errorCount+correctCharCount

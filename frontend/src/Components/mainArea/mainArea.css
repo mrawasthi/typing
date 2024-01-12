@@ -45,14 +45,14 @@
     color:#323232;
     overflow-wrap: break-word;
     word-wrap: break-word;
-    height: 100px;
+    height: 100%;
 }
 .textarea-div{
     resize: none;
     border: none;
     outline: none;
     background-color: transparent;
-    padding: 20px 0px;
+    padding: 20px 20px;
     font-size: 18px;
     position: absolute;
     text-align: left;
@@ -64,11 +64,13 @@
 }
 .super-list{
     font-size: 0px;
-    overflow: hidden;
+    overflow-y: auto;
+    height: 100%;
 }
 .super-list li{
     font-size: 18px;
     display: inline;
+    overflow-y: auto;
 }
 .col-red{
     color: red;

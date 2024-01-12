@@ -64,10 +64,6 @@ const Profile = () => {
                     <p className="font-weight-bold">Recent</p>
                     <h6 className="text-muted">{user.highScore}</h6>
                   </div>
-                  <div className="profile-lower-inner2 upload-text">
-                    <p className="font-weight-bold">Accuracy</p>
-                    <h6 className="text-muted">what derived</h6>
-                  </div>
                 </div>
               </div>
         </div>

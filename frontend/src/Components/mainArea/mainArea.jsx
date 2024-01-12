@@ -20,6 +20,7 @@ export default function MainArea() {
   const [difficultyToggle, setDifficultyToggle]=React.useState(false)
   const [timerToggle, setTimerToggle]=React.useState(false)
   const [showPopup,setShowPopup]=React.useState(false)
+  const [firstTimer, setFirstTimer]=React.useState(0)
   const [visibleButtonTimer, setVisibleButtonTimer]=React.useState({
     color: "dark",
     text: "Timer"
@@ -34,13 +35,13 @@ const [timerTrue,setTimerTrue]=React.useState(0)
   function updateText() {
     if (!running) {
       setRunning(true);
-      setTimerTrue(timer)
+      setTimer(timer)
+      setFirstTimer(firstTimer)
     }
-
   }
    console.log(errWordCount)
    console.log(state)
-   console.log(timerTrue)
+   console.log(firstTimer)
    
   function handleLastKey(e) {
     const currText = e.target.value
@@ -109,8 +110,6 @@ const [timerTrue,setTimerTrue]=React.useState(0)
     setShowPopup(true)
     setDifficultyToggle(false)
     setTimerToggle(false)
-    
-    
   }
   return (
     <div className="uppercontainer">
@@ -120,7 +119,7 @@ const [timerTrue,setTimerTrue]=React.useState(0)
             results={{correctCharCount, errorCount, errWordCount, correctWord,
             setTextData,setState,setCurrInd,setCorrectCharCount,setErrorCharCount,
             setErrorCount,setCorrectWord,setWordInd,setBackspace,setTimer,setRunning,
-            setVisibleButtonDiff, setVisibleButtonTimer,timerTrue,currInd}}
+            setVisibleButtonDiff, setVisibleButtonTimer,firstTimer,currInd}}
             setShowPopup={setShowPopup}
           />
         }
@@ -137,11 +136,12 @@ const [timerTrue,setTimerTrue]=React.useState(0)
             setVisibleButtonTimer={setVisibleButtonTimer}
             visibleButtonTimer={visibleButtonTimer}
             visibleButtonDiff={visibleButtonDiff}
+            setFirstTimer={setFirstTimer}
           />
         </div>
         <div className="stageArea">
           <div className="textarea-div">
-            <ul className="super-list">
+            <div className="super-list">
               {state.map((item, index) => (
                 <li key={index} className={item.color}>
                   {item.content}
@@ -152,7 +152,7 @@ const [timerTrue,setTimerTrue]=React.useState(0)
                   " " +
                   dataArray.slice(currInd + 1, dataArray.length).join(" ")}
               </li>
-            </ul>
+            </div>
           </div>
           {
             difficultyToggle && timerToggle && 
