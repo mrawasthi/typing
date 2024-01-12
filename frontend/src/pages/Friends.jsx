@@ -91,8 +91,7 @@ const Friends = () => {
       if (res.ok) {
         const data = await res.json();
         console.log(data)
-        firstRender()
-        setSearchToggle(false)
+        
       }
 
       else {
@@ -117,7 +116,6 @@ const Friends = () => {
       if (res.ok) {
         const data = await res.json();
         console.log(data)
-        firstRender()
         //localStorage.setItem("token",data.token)
       }
       else {
@@ -142,7 +140,6 @@ const Friends = () => {
       if (res.ok) {
         const data = await res.json();
         console.log(data)
-        firstRender()
         //localStorage.setItem("token",data.token)
       }
       else {
@@ -168,7 +165,6 @@ const Friends = () => {
         const data = await res.json();
         console.log(data)
         //localStorage.setItem("token",data.token)
-        firstRender()
       }
       else {
         console.log("some error")

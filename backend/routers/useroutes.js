@@ -107,7 +107,7 @@ router.post('/cancelRequest', authenticate, async(req, res)=>{
       )
       const FriendtoUser = await User.findByIdAndUpdate(
          friendUser._id,
-         { $pull: { pendingRequestSent:user._id} },
+         { $pull: { pendingRequestSend:user._id} },
          { new: true } 
       )
       res.status(200).json({message: "Done"})
